@@ -9,6 +9,6 @@
 目前已经完成（接力完成）  
 20200519 mainactivity下json文件的获取，新建了viewpage2（adapter待完成）  
   
-  
+    
 Todo  
 viewpage2.setadapter()
