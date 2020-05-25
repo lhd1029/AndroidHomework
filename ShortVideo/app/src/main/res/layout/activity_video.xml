@@ -14,6 +14,14 @@
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:contentDescription="爱心图标" />
+
     </RelativeLayout>
 
     <TextView
@@ -21,6 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="使用的安卓的MediaController类，点击视频部分即可出现控制面板" />
+
+
 
 
     <!--    <SeekBar-->

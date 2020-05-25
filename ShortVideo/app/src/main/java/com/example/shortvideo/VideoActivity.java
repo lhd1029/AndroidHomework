@@ -6,9 +6,11 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.MediaController;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
@@ -20,26 +22,35 @@ import androidx.appcompat.app.AppCompatActivity;
 public class VideoActivity extends AppCompatActivity {
     private Button buttonPlay;
     private Button buttonPause;
-    private VideoView videoView;
+    public VideoView videoView; //此处作了修改，将videoview设为public，用于GestureListener类调用
+    public ImageView imageView; //此处作了修改，新增爱心图标
     private SeekBar seekBar;
     private int sec;
     private boolean isStart;
     private int orientation;
     private boolean paused=false;
+    public static VideoActivity vactivity;//存储本activity，用于GestureListener类调用
+    private GestureDetector gestureDetector;
+
+    public VideoActivity() {
+    }
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        orientation = getResources().getConfiguration().orientation;
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制固定屏幕方向
+        vactivity = this;
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//此处作了修改，强制固定屏幕方向
+
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
 
-//        if (orientation == Configuration.ORIENTATION_PORTRAIT) {
+//        if (orientation == Configuration.ORIENTATION_PORTRAIT) { //此处作了修改，强制固定屏幕方向
             setContentView(R.layout.activity_video);
             videoView = findViewById(R.id.videoView);
             videoView.setVideoPath(url);
+            imageView = findViewById(R.id.photo);
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.MATCH_PARENT);
@@ -49,17 +60,19 @@ public class VideoActivity extends AppCompatActivity {
             layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
             videoView.setLayoutParams(layoutParams);
 
-            videoView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View v, MotionEvent event) {
-                    if (videoView.isPlaying()){
-                        videoView.pause();
-                    }else {
-                        videoView.start();
-                    }
-                    return false;
-                }
-            });
+        gestureDetector = new GestureDetector(this, new GestureListener());//启动同一个手势监听
+            //此处做了修改，采用统一的手势监听类方法GestureListener
+//            videoView.setOnTouchListener(new View.OnTouchListener() {
+//                @Override
+//                public boolean onTouch(View v, MotionEvent event) {
+//                    if (videoView.isPlaying()){
+//                        videoView.pause();
+//                    }else {
+//                        videoView.start();
+//                    }
+//                    return false;
+//                }
+//            });
 //        }
 //        else {
 //        }
@@ -100,6 +113,11 @@ public class VideoActivity extends AppCompatActivity {
         videoView = findViewById(R.id.videoView);
         sec = videoView.getCurrentPosition();
         isStart = videoView.isPlaying();
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event); //启动手势监听
     }
 
     private String getVideoPath(int resId) {
