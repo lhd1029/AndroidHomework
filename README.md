@@ -7,8 +7,13 @@
 4.向下拖拽播放下一个视频  
   
 目前已经完成（接力完成）  
-20200519 mainactivity下json文件的获取，新建了viewpage2（adapter待完成）  
+20200519 mainactivity下json文件的获取，新建了viewpage2
+viewpage2.setadapter()
   
     
 Todo  
-viewpage2.setadapter()
+我想做以下几处调整：  
+1.点开视频自动播放  
+2.屏蔽横屏（目前的程序横屏会崩掉）  
+TODO  
+双击666  
