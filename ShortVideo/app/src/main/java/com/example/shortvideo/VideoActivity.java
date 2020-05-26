@@ -50,7 +50,7 @@ public class VideoActivity extends AppCompatActivity {
             setContentView(R.layout.activity_video);
             videoView = findViewById(R.id.videoView);
             videoView.setVideoPath(url);
-            imageView = findViewById(R.id.photo);
+            imageView = findViewById(R.id.imageView);
             RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                     RelativeLayout.LayoutParams.MATCH_PARENT,
                     RelativeLayout.LayoutParams.MATCH_PARENT);
