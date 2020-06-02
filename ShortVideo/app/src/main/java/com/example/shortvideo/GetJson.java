@@ -43,12 +43,13 @@ public class GetJson {
         URL url;
         HttpsURLConnection httpsURLConnection = null;
         try {
+            //建立连接并发送请求
             url = new URL("https://beiyou.bytedance.com/api/invoke/video/invoke/video");
             httpsURLConnection = (HttpsURLConnection) url.openConnection();
             httpsURLConnection.setRequestMethod("GET");
             httpsURLConnection.setConnectTimeout(CONNECT_TIMEOUT);
             httpsURLConnection.setReadTimeout(TO_TIMEOUT);
-            if (httpsURLConnection.getResponseCode() == 200)
+            if (httpsURLConnection.getResponseCode() == 200)//处理请求
             {
                 InputStream is = httpsURLConnection.getInputStream();
                 BufferedReader bf = new BufferedReader(new InputStreamReader(is,"UTF-8"));

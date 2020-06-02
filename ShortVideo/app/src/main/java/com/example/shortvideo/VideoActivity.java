@@ -39,46 +39,26 @@ public class VideoActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        orientation = getResources().getConfiguration().orientation;
         vactivity = this;
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//此处作了修改，强制固定屏幕方向
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//强制固定屏幕方向
 
         Intent intent = getIntent();
         String url = intent.getStringExtra("url");
-
-//        if (orientation == Configuration.ORIENTATION_PORTRAIT) { //此处作了修改，强制固定屏幕方向
-            setContentView(R.layout.activity_video);
-            videoView = findViewById(R.id.videoView);
-            videoView.setVideoPath(url);
-            imageView = findViewById(R.id.imageView);
-            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                    RelativeLayout.LayoutParams.MATCH_PARENT,
-                    RelativeLayout.LayoutParams.MATCH_PARENT);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-            layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-            videoView.setLayoutParams(layoutParams);
+        //布局videoview
+        setContentView(R.layout.activity_video);
+        videoView = findViewById(R.id.videoView);
+        videoView.setVideoPath(url);
+        imageView = findViewById(R.id.imageView);
+        RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                RelativeLayout.LayoutParams.MATCH_PARENT,
+                RelativeLayout.LayoutParams.MATCH_PARENT);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+        layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+        videoView.setLayoutParams(layoutParams);
 
         gestureDetector = new GestureDetector(this, new GestureListener());//启动手势监听
-            //此处做了修改，采用统一的手势监听类方法GestureListener
-//            videoView.setOnTouchListener(new View.OnTouchListener() {
-//                @Override
-//                public boolean onTouch(View v, MotionEvent event) {
-//                    if (videoView.isPlaying()){
-//                        videoView.pause();
-//                    }else {
-//                        videoView.start();
-//                    }
-//                    return false;
-//                }
-//            });
-//        }
-//        else {
-//        }
-
-//        MediaController mc = new MediaController(VideoActivity.this);
-//        videoView.setMediaController(mc);
 
         if (savedInstanceState != null){
             Log.d("saved", "success");

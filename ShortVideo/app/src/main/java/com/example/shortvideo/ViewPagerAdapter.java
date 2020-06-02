@@ -19,7 +19,7 @@ import com.bumptech.glide.request.RequestOptions;
 import java.util.ArrayList;
 import java.util.List;
 
-class VideoInfo {
+class VideoInfo {//视频信息
     public String feedurl;
     public String nickname;
     public String description;

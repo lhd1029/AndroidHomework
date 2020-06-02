@@ -43,16 +43,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);//固定竖屏
         GetJson gj = new GetJson();
-        JSONArray jsonArray = gj.getJson();
-//        try {
-//            Log.d("json", jsonArray.getJSONObject(0).getString("nickname"));
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        List<VideoInfo> videoInfos = new ArrayList<VideoInfo>();  // 从json数组中提取元素
-
+        JSONArray jsonArray = gj.getJson();//获取json文件
+        // 从json数组中提取元素
+        List<VideoInfo> videoInfos = new ArrayList<VideoInfo>();
         for(int i = 0; i < jsonArray.length(); i++){
             try {
                 JSONObject temp = jsonArray.getJSONObject(i);
